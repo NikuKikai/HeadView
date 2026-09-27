@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/Main.cs" id="1_main"]
+[ext_resource type="PackedScene" path="res://World.tscn" id="2_world"]
+[ext_resource type="PackedScene" path="res://Player.tscn" id="3_player"]
+[ext_resource type="Shader" path="res://assets/focus.gdshader" id="4_focus"]
+[ext_resource type="Script" path="res://src/SeamCrosshair.cs" id="5_crosshair"]
+[ext_resource type="Script" path="res://src/FaceLandmarksView.cs" id="6_face_view"]
+[ext_resource type="PackedScene" path="res://SettingsPanel.tscn" id="7_settings"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_focus"]
+shader = ExtResource("4_focus")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="World" parent="." instance=ExtResource("2_world")]
+
+[node name="SettingsPanel" parent="." instance=ExtResource("7_settings")]
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+
+[node name="ScreenLayout" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="LeftScreen" type="SubViewportContainer" parent="ScreenLayout"]
+offset_right = 640.0
+offset_bottom = 720.0
+mouse_filter = 2
+stretch = true
+
+[node name="LeftViewport" type="SubViewport" parent="ScreenLayout/LeftScreen"]
+size = Vector2i(640, 720)
+
+[node name="LeftCamera" type="Camera3D" parent="ScreenLayout/LeftScreen/LeftViewport"]
+position = Vector3(0, 1.65, 5)
+rotation_degrees = Vector3(0, 35, 0)
+current = true
+
+[node name="RightScreen" type="SubViewportContainer" parent="ScreenLayout"]
+offset_left = 640.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+stretch = true
+
+[node name="RightViewport" type="SubViewport" parent="ScreenLayout/RightScreen"]
+size = Vector2i(640, 720)
+
+[node name="RightCamera" type="Camera3D" parent="ScreenLayout/RightScreen/RightViewport"]
+position = Vector3(0, 1.65, 5)
+rotation_degrees = Vector3(0, -35, 0)
+current = true
+
+[node name="Hud" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="FocusEffect" type="ColorRect" parent="Hud"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+material = SubResource("ShaderMaterial_focus")
+color = Color(1, 1, 1, 1)
+
+[node name="Crosshair" type="Control" parent="Hud"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("5_crosshair")
+
+[node name="LeftInfo" type="Label" parent="Hud"]
+offset_left = 20.0
+offset_top = 18.0
+offset_right = 760.0
+offset_bottom = 180.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="RightInfo" type="Label" parent="Hud"]
+offset_left = 660.0
+offset_top = 18.0
+offset_right = 1260.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="FacePanel" type="Panel" parent="Hud"]
+offset_left = 980.0
+offset_top = 60.0
+offset_right = 1260.0
+offset_bottom = 450.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Hud/FacePanel"]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 268.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "FACE LANDMARKS / POSE"
+
+[node name="FacePreview" type="Control" parent="Hud/FacePanel"]
+offset_left = 12.0
+offset_top = 36.0
+offset_right = 268.0
+offset_bottom = 292.0
+mouse_filter = 2
+
+[node name="CameraImage" type="TextureRect" parent="Hud/FacePanel/FacePreview"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="FaceOverlay" type="Control" parent="Hud/FacePanel/FacePreview"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("6_face_view")
+
+[node name="Values" type="Label" parent="Hud/FacePanel"]
+offset_left = 12.0
+offset_top = 304.0
+offset_right = 268.0
+offset_bottom = 382.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 15
+text = "Waiting for face"

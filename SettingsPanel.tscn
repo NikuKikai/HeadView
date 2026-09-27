@@ -1,0 +1,247 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/SettingButton3D.cs" id="1_button"]
+
+[sub_resource type="BoxMesh" id="BoardMesh"]
+size = Vector3(5.4, 3.35, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="BoardMaterial"]
+albedo_color = Color(0.045, 0.085, 0.12, 1)
+metallic = 0.25
+roughness = 0.45
+emission_enabled = true
+emission = Color(0.015, 0.045, 0.065, 1)
+
+[sub_resource type="BoxMesh" id="ButtonMesh"]
+size = Vector3(0.72, 0.46, 0.12)
+
+[sub_resource type="BoxShape3D" id="ButtonShape"]
+size = Vector3(0.72, 0.46, 0.12)
+
+[sub_resource type="BoxMesh" id="ToggleButtonMesh"]
+size = Vector3(1.5, 0.46, 0.12)
+
+[sub_resource type="BoxShape3D" id="ToggleButtonShape"]
+size = Vector3(1.5, 0.46, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="ButtonMaterial"]
+albedo_color = Color(0.11, 0.5, 0.61, 1)
+roughness = 0.45
+emission_enabled = true
+emission = Color(0.04, 0.24, 0.32, 1)
+
+[node name="SettingsPanel" type="Node3D"]
+position = Vector3(-3, 1.85, -1)
+scale = Vector3(0.75, 0.75, 0.75)
+
+[node name="Board" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoardMesh")
+material_override = SubResource("BoardMaterial")
+
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(0, 1.38, 0.09)
+pixel_size = 0.005
+font_size = 66
+modulate = Color(0.65, 0.96, 0.97, 1)
+text = "SHOOT TO ADJUST"
+
+[node name="SensitivityName" type="Label3D" parent="."]
+position = Vector3(-1.67, 0.85, 0.09)
+pixel_size = 0.005
+font_size = 50
+text = "HEAD SENSITIVITY"
+
+[node name="SensitivityValue" type="Label3D" parent="."]
+position = Vector3(-0.08, 0.85, 0.09)
+pixel_size = 0.005
+font_size = 58
+modulate = Color(0.96, 0.90, 0.47, 1)
+text = "1.0x"
+
+[node name="MouseName" type="Label3D" parent="."]
+position = Vector3(-1.67, 0.37, 0.09)
+pixel_size = 0.005
+font_size = 50
+text = "MOUSE SENSITIVITY"
+
+[node name="MouseValue" type="Label3D" parent="."]
+position = Vector3(-0.08, 0.37, 0.09)
+pixel_size = 0.005
+font_size = 58
+modulate = Color(0.96, 0.90, 0.47, 1)
+text = "1.0x"
+
+[node name="RadiusName" type="Label3D" parent="."]
+position = Vector3(-1.67, -0.11, 0.09)
+pixel_size = 0.005
+font_size = 50
+text = "CLEAR RADIUS"
+
+[node name="RadiusValue" type="Label3D" parent="."]
+position = Vector3(-0.08, -0.11, 0.09)
+pixel_size = 0.005
+font_size = 58
+modulate = Color(0.96, 0.90, 0.47, 1)
+text = "0.64"
+
+[node name="PreviewName" type="Label3D" parent="."]
+position = Vector3(-1.67, -0.59, 0.09)
+pixel_size = 0.005
+font_size = 50
+text = "HUD CAMERA"
+
+[node name="PreviewValue" type="Label3D" parent="."]
+position = Vector3(-0.08, -0.59, 0.09)
+pixel_size = 0.005
+font_size = 58
+modulate = Color(0.96, 0.90, 0.47, 1)
+text = "ON"
+
+[node name="ScreenModeName" type="Label3D" parent="."]
+position = Vector3(-1.67, -1.07, 0.09)
+pixel_size = 0.005
+font_size = 50
+text = "SCREEN MODE"
+
+[node name="ScreenModeValue" type="Label3D" parent="."]
+position = Vector3(-0.08, -1.07, 0.09)
+pixel_size = 0.005
+font_size = 58
+modulate = Color(0.96, 0.90, 0.47, 1)
+text = "DUAL"
+
+[node name="SensitivityMinus" type="StaticBody3D" parent="."]
+position = Vector3(0.75, 0.85, 0.17)
+script = ExtResource("1_button")
+
+[node name="Visual" type="MeshInstance3D" parent="SensitivityMinus"]
+mesh = SubResource("ButtonMesh")
+material_override = SubResource("ButtonMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="SensitivityMinus"]
+shape = SubResource("ButtonShape")
+
+[node name="Glyph" type="Label3D" parent="SensitivityMinus"]
+position = Vector3(0, 0, 0.07)
+pixel_size = 0.005
+font_size = 78
+text = "-"
+
+[node name="SensitivityPlus" type="StaticBody3D" parent="."]
+position = Vector3(1.68, 0.85, 0.17)
+script = ExtResource("1_button")
+
+[node name="Visual" type="MeshInstance3D" parent="SensitivityPlus"]
+mesh = SubResource("ButtonMesh")
+material_override = SubResource("ButtonMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="SensitivityPlus"]
+shape = SubResource("ButtonShape")
+
+[node name="Glyph" type="Label3D" parent="SensitivityPlus"]
+position = Vector3(0, 0, 0.07)
+pixel_size = 0.005
+font_size = 78
+text = "+"
+
+[node name="MouseMinus" type="StaticBody3D" parent="."]
+position = Vector3(0.75, 0.37, 0.17)
+script = ExtResource("1_button")
+
+[node name="Visual" type="MeshInstance3D" parent="MouseMinus"]
+mesh = SubResource("ButtonMesh")
+material_override = SubResource("ButtonMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="MouseMinus"]
+shape = SubResource("ButtonShape")
+
+[node name="Glyph" type="Label3D" parent="MouseMinus"]
+position = Vector3(0, 0, 0.07)
+pixel_size = 0.005
+font_size = 78
+text = "-"
+
+[node name="MousePlus" type="StaticBody3D" parent="."]
+position = Vector3(1.68, 0.37, 0.17)
+script = ExtResource("1_button")
+
+[node name="Visual" type="MeshInstance3D" parent="MousePlus"]
+mesh = SubResource("ButtonMesh")
+material_override = SubResource("ButtonMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="MousePlus"]
+shape = SubResource("ButtonShape")
+
+[node name="Glyph" type="Label3D" parent="MousePlus"]
+position = Vector3(0, 0, 0.07)
+pixel_size = 0.005
+font_size = 78
+text = "+"
+
+[node name="RadiusMinus" type="StaticBody3D" parent="."]
+position = Vector3(0.75, -0.11, 0.17)
+script = ExtResource("1_button")
+
+[node name="Visual" type="MeshInstance3D" parent="RadiusMinus"]
+mesh = SubResource("ButtonMesh")
+material_override = SubResource("ButtonMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="RadiusMinus"]
+shape = SubResource("ButtonShape")
+
+[node name="Glyph" type="Label3D" parent="RadiusMinus"]
+position = Vector3(0, 0, 0.07)
+pixel_size = 0.005
+font_size = 78
+text = "-"
+
+[node name="RadiusPlus" type="StaticBody3D" parent="."]
+position = Vector3(1.68, -0.11, 0.17)
+script = ExtResource("1_button")
+
+[node name="Visual" type="MeshInstance3D" parent="RadiusPlus"]
+mesh = SubResource("ButtonMesh")
+material_override = SubResource("ButtonMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="RadiusPlus"]
+shape = SubResource("ButtonShape")
+
+[node name="Glyph" type="Label3D" parent="RadiusPlus"]
+position = Vector3(0, 0, 0.07)
+pixel_size = 0.005
+font_size = 78
+text = "+"
+
+[node name="PreviewToggle" type="StaticBody3D" parent="."]
+position = Vector3(1.21, -0.59, 0.17)
+script = ExtResource("1_button")
+
+[node name="Visual" type="MeshInstance3D" parent="PreviewToggle"]
+mesh = SubResource("ToggleButtonMesh")
+material_override = SubResource("ButtonMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="PreviewToggle"]
+shape = SubResource("ToggleButtonShape")
+
+[node name="Glyph" type="Label3D" parent="PreviewToggle"]
+position = Vector3(0, 0, 0.07)
+pixel_size = 0.005
+font_size = 50
+text = "TOGGLE"
+
+[node name="ScreenModeToggle" type="StaticBody3D" parent="."]
+position = Vector3(1.21, -1.07, 0.17)
+script = ExtResource("1_button")
+
+[node name="Visual" type="MeshInstance3D" parent="ScreenModeToggle"]
+mesh = SubResource("ToggleButtonMesh")
+material_override = SubResource("ButtonMaterial")
+
+[node name="Collision" type="CollisionShape3D" parent="ScreenModeToggle"]
+shape = SubResource("ToggleButtonShape")
+
+[node name="Glyph" type="Label3D" parent="ScreenModeToggle"]
+position = Vector3(0, 0, 0.07)
+pixel_size = 0.005
+font_size = 50
+text = "TOGGLE"

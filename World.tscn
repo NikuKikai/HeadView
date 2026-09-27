@@ -1,0 +1,332 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="PackedScene" path="res://Target.tscn" id="1_target"]
+
+[sub_resource type="Environment" id="Environment_world"]
+background_mode = 1
+background_color = Color(0.21, 0.29, 0.4, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.82, 1, 1)
+ambient_light_energy = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+size = Vector3(80, 0.6, 80)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ground"]
+size = Vector3(80, 0.6, 80)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_ns"]
+size = Vector3(80, 5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape_wall_ns"]
+size = Vector3(80, 5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_ew"]
+size = Vector3(0.5, 5, 80)
+
+[sub_resource type="BoxShape3D" id="BoxShape_wall_ew"]
+size = Vector3(0.5, 5, 80)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cover"]
+size = Vector3(2.2, 1.4, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape_cover"]
+size = Vector3(2.2, 1.4, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.16, 0.2, 0.22, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Material_wall"]
+albedo_color = Color(0.29, 0.32, 0.36, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Material_cyan"]
+albedo_color = Color(0.19, 0.53, 0.63, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Material_orange"]
+albedo_color = Color(0.8, 0.47, 0.2, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Material_green"]
+albedo_color = Color(0.35, 0.64, 0.3, 1)
+roughness = 0.9
+
+[node name="World" type="Node3D"]
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_world")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -32, 0)
+light_energy = 1.25
+
+[node name="Ground" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.3, 0)
+
+[node name="Visual" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_ground")
+material_override = SubResource("Material_ground")
+
+[node name="Collision" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape_ground")
+
+[node name="NorthWall" type="StaticBody3D" parent="."]
+position = Vector3(0, 2.5, -40)
+
+[node name="Visual" type="MeshInstance3D" parent="NorthWall"]
+mesh = SubResource("BoxMesh_wall_ns")
+material_override = SubResource("Material_wall")
+
+[node name="Collision" type="CollisionShape3D" parent="NorthWall"]
+shape = SubResource("BoxShape_wall_ns")
+
+[node name="SouthWall" type="StaticBody3D" parent="."]
+position = Vector3(0, 2.5, 40)
+
+[node name="Visual" type="MeshInstance3D" parent="SouthWall"]
+mesh = SubResource("BoxMesh_wall_ns")
+material_override = SubResource("Material_wall")
+
+[node name="Collision" type="CollisionShape3D" parent="SouthWall"]
+shape = SubResource("BoxShape_wall_ns")
+
+[node name="EastWall" type="StaticBody3D" parent="."]
+position = Vector3(40, 2.5, 0)
+
+[node name="Visual" type="MeshInstance3D" parent="EastWall"]
+mesh = SubResource("BoxMesh_wall_ew")
+material_override = SubResource("Material_wall")
+
+[node name="Collision" type="CollisionShape3D" parent="EastWall"]
+shape = SubResource("BoxShape_wall_ew")
+
+[node name="WestWall" type="StaticBody3D" parent="."]
+position = Vector3(-40, 2.5, 0)
+
+[node name="Visual" type="MeshInstance3D" parent="WestWall"]
+mesh = SubResource("BoxMesh_wall_ew")
+material_override = SubResource("Material_wall")
+
+[node name="Collision" type="CollisionShape3D" parent="WestWall"]
+shape = SubResource("BoxShape_wall_ew")
+
+[node name="Cover01" type="StaticBody3D" parent="."]
+position = Vector3(-7, 0.7, -7)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover01"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_cyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover01"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover02" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.7, -7)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover02"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_orange")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover02"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover03" type="StaticBody3D" parent="."]
+position = Vector3(7, 0.7, -7)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover03"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_green")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover03"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover04" type="StaticBody3D" parent="."]
+position = Vector3(-7, 0.7, -12)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover04"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_cyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover04"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover05" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.7, -12)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover05"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_orange")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover05"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover06" type="StaticBody3D" parent="."]
+position = Vector3(7, 0.7, -12)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover06"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_green")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover06"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover07" type="StaticBody3D" parent="."]
+position = Vector3(-7, 0.7, -17)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover07"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_cyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover07"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover08" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.7, -17)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover08"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_orange")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover08"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover09" type="StaticBody3D" parent="."]
+position = Vector3(7, 0.7, -17)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover09"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_green")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover09"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover10" type="StaticBody3D" parent="."]
+position = Vector3(-7, 0.7, -22)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover10"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_cyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover10"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover11" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.7, -22)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover11"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_orange")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover11"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover12" type="StaticBody3D" parent="."]
+position = Vector3(7, 0.7, -22)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover12"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_green")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover12"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover13" type="StaticBody3D" parent="."]
+position = Vector3(-7, 0.7, -27)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover13"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_cyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover13"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover14" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.7, -27)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover14"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_orange")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover14"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover15" type="StaticBody3D" parent="."]
+position = Vector3(7, 0.7, -27)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover15"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_green")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover15"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover16" type="StaticBody3D" parent="."]
+position = Vector3(-7, 0.7, -32)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover16"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_cyan")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover16"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover17" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.7, -32)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover17"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_orange")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover17"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Cover18" type="StaticBody3D" parent="."]
+position = Vector3(7, 0.7, -32)
+
+[node name="Visual" type="MeshInstance3D" parent="Cover18"]
+mesh = SubResource("BoxMesh_cover")
+material_override = SubResource("Material_green")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover18"]
+shape = SubResource("BoxShape_cover")
+
+[node name="Target01" parent="." instance=ExtResource("1_target")]
+position = Vector3(-12, 1.8, -11)
+
+[node name="Target02" parent="." instance=ExtResource("1_target")]
+position = Vector3(-4, 1.8, -11)
+
+[node name="Target03" parent="." instance=ExtResource("1_target")]
+position = Vector3(4, 1.8, -11)
+
+[node name="Target04" parent="." instance=ExtResource("1_target")]
+position = Vector3(12, 1.8, -11)
+
+[node name="Target05" parent="." instance=ExtResource("1_target")]
+position = Vector3(-12, 1.8, -21)
+
+[node name="Target06" parent="." instance=ExtResource("1_target")]
+position = Vector3(-4, 1.8, -21)
+
+[node name="Target07" parent="." instance=ExtResource("1_target")]
+position = Vector3(4, 1.8, -21)
+
+[node name="Target08" parent="." instance=ExtResource("1_target")]
+position = Vector3(12, 1.8, -21)
+
+[node name="Target09" parent="." instance=ExtResource("1_target")]
+position = Vector3(-12, 1.8, -31)
+
+[node name="Target10" parent="." instance=ExtResource("1_target")]
+position = Vector3(-4, 1.8, -31)
+
+[node name="Target11" parent="." instance=ExtResource("1_target")]
+position = Vector3(4, 1.8, -31)
+
+[node name="Target12" parent="." instance=ExtResource("1_target")]
+position = Vector3(12, 1.8, -31)
+
+[node name="CenterTarget" parent="." instance=ExtResource("1_target")]
+position = Vector3(0, 1.8, -12)

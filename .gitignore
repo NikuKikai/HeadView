@@ -1,0 +1,13 @@
+.godot/
+.vs/
+bin/
+obj/
+*.user
+qa-*.png
+godot-run.log
+godot-editor-check.log
+build/
+Build/
+*.zip
+*.dll
+*.task
